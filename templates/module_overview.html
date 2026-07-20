@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% set title = selected_list.title ~ " - Portal de Exercicios" %}
+
+{% block content %}
+  <section class="hero">
+    <p class="eyebrow">Pasta de exercicios</p>
+    <h1>{{ selected_list.title }}</h1>
+    <p>
+      Exercicios encontrados em <strong>{{ selected_list.folder }}</strong>. Clique em um
+      item para abrir a pagina feita nessa pasta.
+    </p>
+  </section>
+
+  <section class="list-grid" aria-label="Exercicios encontrados">
+    {% for exercise in selected_list.exercises %}
+      <article class="list-card">
+        <div>
+          <h2>{{ exercise.title }}</h2>
+          <p>Arquivo: <code>{{ exercise.filename }}</code></p>
+        </div>
+        <div class="card-footer">
+          <span>Exercicio feito</span>
+          <a
+            href="{{ url_for('exercise_detail', list_slug=selected_list.slug, exercise_slug=exercise.slug) }}"
+          >
+            Abrir
+          </a>
+        </div>
+      </article>
+    {% else %}
+      <article class="list-card">
+        <div>
+          <h2>Nenhum exercicio encontrado</h2>
+          <p>Adicione arquivos HTML em <code>{{ selected_list.folder }}/templates</code>.</p>
+        </div>
+      </article>
+    {% endfor %}
+  </section>
+{% endblock %}

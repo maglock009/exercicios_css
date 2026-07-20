@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% set title = selected_exercise.title ~ " - Portal de Exercicios" %}
+
+{% block content %}
+  <article class="exercise-panel">
+    <header class="exercise-header">
+      <div>
+        <p class="eyebrow">{{ selected_list.title }}</p>
+        <h1>{{ selected_exercise.title }}</h1>
+        <p>Pagina encontrada em {{ selected_list.folder }}.</p>
+      </div>
+      <a class="back-link" href="{{ url_for('home') }}">Voltar ao inicio</a>
+    </header>
+
+    <section class="exercise-body">
+      <h2>Arquivo do exercicio</h2>
+      <p><code>{{ selected_exercise.filename }}</code></p>
+    </section>
+
+    <footer class="exercise-actions">
+      {% if next_exercise %}
+        <a
+          class="next-exercise-link"
+          href="{{ url_for('exercise_detail', list_slug=selected_list.slug, exercise_slug=next_exercise.slug) }}"
+        >
+          Ir para o proximo exercicio
+        </a>
+      {% else %}
+        <a class="next-exercise-link" href="{{ url_for('exercise_list', list_slug=selected_list.slug) }}">
+          Voltar para a lista
+        </a>
+      {% endif %}
+    </footer>
+  </article>
+{% endblock %}

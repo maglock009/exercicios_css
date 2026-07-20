@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% set title = selected_exercise.title ~ " - Formularios" %}
+
+{% block content %}
+  <article class="exercise-panel module-page">
+    <header class="exercise-header">
+      <div>
+        <p class="eyebrow">{{ selected_list.title }}</p>
+        <h1>{{ selected_exercise.title }}</h1>
+        <p>Visualizacao do formulario de preferencias feito na pasta de exercicios.</p>
+      </div>
+      <a class="back-link" href="{{ url_for('home') }}">Voltar ao inicio</a>
+    </header>
+
+    <section class="module-grid">
+      <div class="module-card">
+        <h2>Formulario de preferencias</h2>
+        <p>Pagina pronta com turno, interesses e nivel de conhecimento.</p>
+
+        <form class="sample-form" action="#" method="post">
+          <fieldset>
+            <legend>Turno preferido</legend>
+            <label><input type="radio" name="turno"> Manha</label>
+            <label><input type="radio" name="turno"> Tarde</label>
+            <label><input type="radio" name="turno"> Noite</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Interesses</legend>
+            <label><input type="checkbox" name="interesses"> HTML</label>
+            <label><input type="checkbox" name="interesses"> CSS</label>
+            <label><input type="checkbox" name="interesses"> Flask</label>
+          </fieldset>
+
+          <label for="sample-level">Nivel</label>
+          <select id="sample-level">
+            <option>Iniciante</option>
+            <option>Intermediario</option>
+            <option>Avancado</option>
+          </select>
+
+          <button type="button">Salvar preferencias</button>
+        </form>
+      </div>
+
+      <div class="module-card">
+        <h2>Recursos exibidos</h2>
+        <ul class="student-list">
+          <li>Radio buttons para turno</li>
+          <li>Checkboxes para interesses</li>
+          <li>Select para nivel</li>
+          <li>Botao para salvar</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="exercise-actions">
+      {% if next_exercise %}
+        <a
+          class="next-exercise-link"
+          href="{{ url_for('exercise_detail', list_slug=selected_list.slug, exercise_slug=next_exercise.slug) }}"
+        >
+          Ir para o proximo exercicio
+        </a>
+      {% else %}
+        <a class="next-exercise-link" href="{{ url_for('exercise_list', list_slug=selected_list.slug) }}">
+          Voltar para a lista
+        </a>
+      {% endif %}
+    </footer>
+  </article>
+{% endblock %}

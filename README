@@ -1,0 +1,38 @@
+Exercicios HTML
+Este projeto servirá para apresentar as funcionalidades exigidas nos exercicios 1, 2, 3, 4 e 5 do módulo de HTML. 
+Projeto em Python com funcionalidades organizadas em módul. Objetivo: demonstrar boas práticas de desenvolvimento, uso de Git e organização de projeto.
+
+Estrutura do Projeto
+Pré-requisitos
+Python >= 3.10
+Pip
+venv
+Instalação
+Clonando o repositório
+git clone https://github.com/maglock009/exercicios-flask-html.git cd maglock009
+
+Criando e ativando ambiente virtual
+Windows: python -m venv venv venv\Scripts\activate
+
+Linux/Mac: python -m venv venv source venv/bin/activate
+
+Instalando dependências
+pip install -r requirements.txt
+
+Execução
+python app.py
+
+Testes
+Executar testes automatizados: pytest
+
+Recomenda-se manter os testes em tests/.
+Branches
+main: versão estável do projeto
+dev: branch de desenvolvimento para novas funcionalidades
+Tecnologias e Dependências
+Python 3.x
+Qualquer outro framework
+Autor / Contato
+Miguel Dias do Canto
+GitHub: https://github.com/maglock009/exercicios-flask-html.git
+E-mail: diasdocantomiguel@gmail.com

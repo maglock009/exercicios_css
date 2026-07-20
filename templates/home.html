@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% set title = "Meus Exercicios - Portal de Exercicios" %}
+
+{% block content %}
+  <section class="hero">
+    <p class="eyebrow">Menu de exercicios</p>
+    <h1>Escolha a pasta de exercicios que deseja acessar</h1>
+    <p>
+      Este menu lista os exercicios ja feitos das listas de
+      <strong>formulários</strong> e <strong>estrutura do flask</strong>.
+      Abra uma pasta e selecione o exercicio que deseja visualizar.
+    </p>
+  </section>
+
+  <section class="list-grid" aria-label="Pastas de exercicios">
+    {% for exercise_list in exercise_lists %}
+      <article class="list-card">
+        <div>
+          <h2>{{ exercise_list.title }}</h2>
+          <p>Pasta: <code>{{ exercise_list.folder }}</code></p>
+        </div>
+        <div class="card-footer">
+          <span>{{ exercise_list.exercises|length }} arquivos</span>
+          <a href="{{ url_for('exercise_list', list_slug=exercise_list.slug) }}">
+            Ver exercicios
+          </a>
+        </div>
+      </article>
+    {% endfor %}
+  </section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block body_class %}login-page{% endblock %}
+
+{% block public_content %}
+  <main class="login-wrapper">
+    <section class="login-card" aria-labelledby="login-title">
+      <div class="login-header">
+        <span class="brand-mark large">E</span>
+        <div>
+          <p class="eyebrow">Acesso restrito</p>
+          <h1 id="login-title">Portal de Exercicios</h1>
+        </div>
+      </div>
+
+      <p class="login-description">
+        Entre para acessar o menu dos exercicios ja feitos nas pastas do projeto.
+      </p>
+
+      {% if error %}
+        <p class="alert" role="alert">{{ error }}</p>
+      {% endif %}
+
+      <form method="post" class="login-form">
+        <label for="username">Usuario</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          placeholder="Miguel"
+          required
+          autofocus
+        >
+
+        <label for="password">Senha</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="12345"
+          required
+        >
+
+        <button type="submit">Entrar</button>
+      </form>
+    </section>
+  </main>
+{% endblock %}

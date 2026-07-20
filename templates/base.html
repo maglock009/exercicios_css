@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title or "Portal de Exercicios" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    {% if session.get("is_authenticated") %}
+      <div class="app-shell">
+        <aside class="sidebar" aria-label="Navegacao dos exercicios feitos">
+          <a class="sidebar-brand" href="{{ url_for('home') }}">
+            <span class="brand-mark">E</span>
+            <span>
+              <strong>Exercicios</strong>
+              <small>Meus exercicios</small>
+            </span>
+          </a>
+
+          <nav class="sidebar-nav">
+            <a class="nav-home" href="{{ url_for('home') }}">Pagina inicial</a>
+            {% for exercise_list in exercise_lists %}
+              <section class="nav-group">
+                <a
+                  class="nav-list-title {% if selected_list and selected_list.slug == exercise_list.slug %}active{% endif %}"
+                  href="{{ url_for('exercise_list', list_slug=exercise_list.slug) }}"
+                >
+                  {{ exercise_list.title }}
+                </a>
+                <ul>
+                  {% for exercise in exercise_list.exercises %}
+                    <li>
+                      <a
+                        href="{{ url_for('exercise_detail', list_slug=exercise_list.slug, exercise_slug=exercise.slug) }}"
+                        class="{% if selected_exercise and selected_exercise.slug == exercise.slug %}active{% endif %}"
+                      >
+                        {{ exercise.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </section>
+            {% endfor %}
+          </nav>
+        </aside>
+
+        <main class="content">
+          <header class="topbar">
+            <div>
+              <span class="eyebrow">Bem-vindo</span>
+              <strong>{{ session.get("username") }}</strong>
+            </div>
+            <a class="logout-link" href="{{ url_for('logout') }}">Sair</a>
+          </header>
+
+          {% block content %}{% endblock %}
+        </main>
+      </div>
+    {% else %}
+      {% block public_content %}{% endblock %}
+    {% endif %}
+  </body>
+</html>

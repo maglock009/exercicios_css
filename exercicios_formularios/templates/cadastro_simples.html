@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% set title = selected_exercise.title ~ " - Formularios" %}
+
+{% block content %}
+  <article class="exercise-panel module-page">
+    <header class="exercise-header">
+      <div>
+        <p class="eyebrow">{{ selected_list.title }}</p>
+        <h1>{{ selected_exercise.title }}</h1>
+        <p>Visualizacao do formulario de cadastro feito na pasta de exercicios.</p>
+      </div>
+      <a class="back-link" href="{{ url_for('home') }}">Voltar ao inicio</a>
+    </header>
+
+    <section class="module-grid">
+      <div class="module-card">
+        <h2>Formulario de cadastro</h2>
+        <p>Pagina pronta com campos de nome, email, senha e acao de envio.</p>
+
+        <form class="sample-form" action="#" method="post">
+          <label for="sample-name">Nome</label>
+          <input id="sample-name" type="text" placeholder="Digite seu nome">
+
+          <label for="sample-email">Email</label>
+          <input id="sample-email" type="email" placeholder="voce@email.com">
+
+          <label for="sample-password">Senha</label>
+          <input id="sample-password" type="password" placeholder="Digite sua senha">
+
+          <button type="button">Enviar cadastro</button>
+        </form>
+      </div>
+
+      <div class="module-card">
+        <h2>Campos exibidos</h2>
+        <ul class="student-list">
+          <li>Nome</li>
+          <li>Email</li>
+          <li>Senha</li>
+          <li>Botao de cadastro</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="exercise-actions">
+      {% if next_exercise %}
+        <a
+          class="next-exercise-link"
+          href="{{ url_for('exercise_detail', list_slug=selected_list.slug, exercise_slug=next_exercise.slug) }}"
+        >
+          Ir para o proximo exercicio
+        </a>
+      {% else %}
+        <a class="next-exercise-link" href="{{ url_for('exercise_list', list_slug=selected_list.slug) }}">
+          Voltar para a lista
+        </a>
+      {% endif %}
+    </footer>
+  </article>
+{% endblock %}
