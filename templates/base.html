@@ -9,7 +9,7 @@
   <body class="{% block body_class %}{% endblock %}">
     {% if session.get("is_authenticated") %}
       <div class="app-shell">
-        <aside class="sidebar" aria-label="Navegacao dos exercicios feitos">
+        <aside id="sidebar" class="sidebar" aria-label="Navegacao dos exercicios feitos">
           <a class="sidebar-brand" href="{{ url_for('home') }}">
             <span class="brand-mark">E</span>
             <span>
@@ -47,9 +47,20 @@
 
         <main class="content">
           <header class="topbar">
-            <div>
-              <span class="eyebrow">Bem-vindo</span>
-              <strong>{{ session.get("username") }}</strong>
+            <div class="topbar-left">
+              <button
+                type="button"
+                class="sidebar-toggle"
+                aria-label="Recolher ou expandir o menu lateral"
+                aria-controls="sidebar"
+                aria-expanded="true"
+              >
+                <span class="sidebar-toggle-icon" aria-hidden="true"></span>
+              </button>
+              <div>
+                <span class="eyebrow">Bem-vindo</span>
+                <strong>{{ session.get("username") }}</strong>
+              </div>
             </div>
             <a class="logout-link" href="{{ url_for('logout') }}">Sair</a>
           </header>
@@ -57,6 +68,36 @@
           {% block content %}{% endblock %}
         </main>
       </div>
+      <script>
+        (function () {
+          var shell = document.querySelector(".app-shell");
+          var toggle = document.querySelector(".sidebar-toggle");
+          if (!shell || !toggle) {
+            return;
+          }
+
+          var STORAGE_KEY = "sidebar-collapsed";
+
+          function applyState(collapsed) {
+            shell.classList.toggle("sidebar-collapsed", collapsed);
+            toggle.setAttribute("aria-expanded", String(!collapsed));
+          }
+
+          try {
+            applyState(window.localStorage.getItem(STORAGE_KEY) === "true");
+          } catch (err) {
+            applyState(false);
+          }
+
+          toggle.addEventListener("click", function () {
+            var collapsed = !shell.classList.contains("sidebar-collapsed");
+            applyState(collapsed);
+            try {
+              window.localStorage.setItem(STORAGE_KEY, String(collapsed));
+            } catch (err) {}
+          });
+        })();
+      </script>
     {% else %}
       {% block public_content %}{% endblock %}
     {% endif %}
