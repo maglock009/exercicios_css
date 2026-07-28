@@ -3,22 +3,26 @@ from controllers.base_controller import BaseController
 
 class FormulariosController(BaseController):
 
-    list_slug = "exercicios-formularios"
     list_title = "Exercicios Formularios"
     folder = "exercicios_formularios"
+    list_url = "/listas/exercicios-formularios"
+
+    pagina_cadastro_simples = {
+        "title": "Cadastro Simples",
+        "template": "exercicios_formularios/cadastro_simples.html",
+        "filename": "cadastro_simples.html",
+        "url": "/listas/exercicios-formularios/cadastro-simples",
+    }
+    pagina_preferencias = {
+        "title": "Preferencias",
+        "template": "exercicios_formularios/preferencias.html",
+        "filename": "preferencias.html",
+        "url": "/listas/exercicios-formularios/preferencias",
+    }
+
     exercises = [
-        {
-            "slug": "cadastro-simples",
-            "title": "Cadastro Simples",
-            "template": "exercicios_formularios/cadastro_simples.html",
-            "filename": "cadastro_simples.html",
-        },
-        {
-            "slug": "preferencias",
-            "title": "Preferencias",
-            "template": "exercicios_formularios/preferencias.html",
-            "filename": "preferencias.html",
-        },
+        pagina_cadastro_simples,
+        pagina_preferencias,
     ]
 
     def __init__(self, app, login_required):
@@ -40,15 +44,19 @@ class FormulariosController(BaseController):
             ),
             (
                 "/cadastro_simples",
-                "legacy_cadastro_simples",
-                self.legacy_cadastro_simples,
+                "redirecionar_cadastro_simples",
+                self.redirecionar_cadastro_simples,
             ),
             (
                 "/cadastro-simples",
-                "legacy_cadastro_simples_hifen",
-                self.legacy_cadastro_simples,
+                "redirecionar_cadastro_simples_hifen",
+                self.redirecionar_cadastro_simples,
             ),
-            ("/preferencias", "legacy_preferencias", self.legacy_preferencias),
+            (
+                "/preferencias",
+                "redirecionar_preferencias",
+                self.redirecionar_preferencias,
+            ),
         ]
 
         super().__init__(app, login_required)
@@ -57,13 +65,13 @@ class FormulariosController(BaseController):
         return self.renderizar_lista()
 
     def cadastro_simples(self):
-        return self.renderizar_exercicio("cadastro-simples")
+        return self.renderizar_exercicio(self.pagina_cadastro_simples)
 
     def preferencias(self):
-        return self.renderizar_exercicio("preferencias")
+        return self.renderizar_exercicio(self.pagina_preferencias)
 
-    def legacy_cadastro_simples(self):
-        return self.redirecionar_para_exercicio("cadastro-simples")
+    def redirecionar_cadastro_simples(self):
+        return self.redirecionar_para_exercicio(self.pagina_cadastro_simples)
 
-    def legacy_preferencias(self):
-        return self.redirecionar_para_exercicio("preferencias")
+    def redirecionar_preferencias(self):
+        return self.redirecionar_para_exercicio(self.pagina_preferencias)
