@@ -2,6 +2,12 @@
 
 {% set title = selected_exercise.title ~ " - Formularios" %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/exercise.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/forms.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='exercises/preferencias.css') }}">
+{% endblock %}
+
 {% block content %}
   <article class="exercise-panel module-page">
     <header class="exercise-header">

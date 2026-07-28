@@ -2,6 +2,10 @@
 
 {% set title = selected_exercise.title ~ " - Portal de Exercicios" %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/exercise.css') }}">
+{% endblock %}
+
 {% block content %}
   <article class="exercise-panel">
     <header class="exercise-header">

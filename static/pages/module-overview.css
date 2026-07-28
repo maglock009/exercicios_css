@@ -1,0 +1,5 @@
+.hero strong,
+.list-card code {
+  color: var(--primary-dark);
+  font-weight: 800;
+}

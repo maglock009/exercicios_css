@@ -1,0 +1,8 @@
+.exercise-body span {
+  color: var(--primary-dark);
+  font-weight: 800;
+}
+
+.exercise-body strong {
+  color: #334155;
+}

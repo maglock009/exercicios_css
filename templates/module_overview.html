@@ -2,6 +2,11 @@
 
 {% set title = selected_list.title ~ " - Portal de Exercicios" %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/cards.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/module-overview.css') }}">
+{% endblock %}
+
 {% block content %}
   <section class="hero">
     <p class="eyebrow">Pasta de exercicios</p>

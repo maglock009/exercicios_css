@@ -2,6 +2,11 @@
 
 {% set title = "Meus Exercicios - Portal de Exercicios" %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/cards.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/home.css') }}">
+{% endblock %}
+
 {% block content %}
   <section class="hero">
     <p class="eyebrow">Menu de exercicios</p>

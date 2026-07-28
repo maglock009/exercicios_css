@@ -2,6 +2,11 @@
 
 {% set title = selected_exercise.title ~ " - Exercicios Flask" %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/exercise.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='exercises/exercicio-4-html.css') }}">
+{% endblock %}
+
 {% block content %}
   <article class="exercise-panel">
     <header class="exercise-header">
