@@ -31,5 +31,4 @@ e registrado explicitamente pelos controllers. Detalhes gerais de setup estão n
 - A sidebar retrátil guarda o estado (recolhida/expandida) em `localStorage`
   (`sidebar-collapsed`). Após recolher uma vez, ela permanece recolhida em logins
   seguintes até ser expandida novamente — isso é intencional.
-- Os pacotes `exercicios_flask/controllers/` e `exercicios_formularios/controllers/`
-  registram as rotas de cada exercício no `app.py`.
+- O pacote `controllers/` registra as rotas de cada exercício no `app.py`.

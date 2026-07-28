@@ -4,8 +4,8 @@ from pathlib import Path
 from flask import Flask, redirect, render_template, request, send_from_directory, session, url_for
 from jinja2 import ChoiceLoader, FileSystemLoader, PrefixLoader
 
-from exercicios_flask.controllers.html_basico_controller import HTMLBasicoController
-from exercicios_formularios.controllers.formularios_controller import FormulariosController
+from controllers.formularios_controller import FormulariosController
+from controllers.html_basico_controller import HTMLBasicoController
 
 DEFAULT_USER = "Miguel"
 DEFAULT_PASSWORD = "12345"
