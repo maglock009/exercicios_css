@@ -12,7 +12,7 @@ DEFAULT_PASSWORD = "12345"
 BASE_DIR = Path(__file__).resolve().parent
 
 app = Flask(__name__)
-app.secret_key = "dev-secret-key-change-me"
+app.secret_key = "123456"
 app.jinja_loader = ChoiceLoader(
     [
         app.jinja_loader,
