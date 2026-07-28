@@ -1,32 +1,96 @@
-from flask import render_template
 from controllers.base_controller import BaseController
 
+
 class HTMLBasicoController(BaseController):
-    
-    def __init__ (self, app):
+
+    list_slug = "exercicios-flask"
+    list_title = "Exercicios Flask"
+    folder = "exercicios_flask"
+    exercises = [
+        {
+            "slug": "exercicio-1-html",
+            "title": "Exercicio 1 Html",
+            "template": "exercicios_flask/exercicio_1_html.html",
+            "filename": "exercicio_1_html.html",
+        },
+        {
+            "slug": "exercicio-2-html",
+            "title": "Exercicio 2 Html",
+            "template": "exercicios_flask/exercicio_2_html.html",
+            "filename": "exercicio_2_html.html",
+        },
+        {
+            "slug": "exercicio-3-html",
+            "title": "Exercicio 3 Html",
+            "template": "exercicios_flask/exercicio_3_html.html",
+            "filename": "exercicio_3_html.html",
+        },
+        {
+            "slug": "exercicio-4-html",
+            "title": "Exercicio 4 Html",
+            "template": "exercicios_flask/exercicio_4_html.html",
+            "filename": "exercicio_4_html.html",
+        },
+    ]
+
+    def __init__(self, app, login_required):
         self.rotas = [
-            ('/', 'home', self.pagina_inicial),
-            ('/exercicio_1','exercicio 1',self.exercicio_1),
-            ('/exercicio_2','exercicio 2',self.exercicio_2),
-            ('/exercicio_3','exercicio 3',self.exercicio_3),
-            ('/exercicio_4',"exercicio 4",self.exercicio_4),
+            ("/listas/exercicios-flask", "exercicios_flask_lista", self.lista),
+            (
+                "/listas/exercicios-flask/exercicio-1-html",
+                "exercicios_flask_exercicio_1",
+                self.exercicio_1,
+            ),
+            (
+                "/listas/exercicios-flask/exercicio-2-html",
+                "exercicios_flask_exercicio_2",
+                self.exercicio_2,
+            ),
+            (
+                "/listas/exercicios-flask/exercicio-3-html",
+                "exercicios_flask_exercicio_3",
+                self.exercicio_3,
+            ),
+            (
+                "/listas/exercicios-flask/exercicio-4-html",
+                "exercicios_flask_exercicio_4",
+                self.exercicio_4,
+            ),
+            ("/exercicio_1", "legacy_exercicio_1", self.legacy_exercicio_1),
+            ("/exercicio_1_html", "legacy_exercicio_1_html", self.legacy_exercicio_1),
+            ("/exercicio_2", "legacy_exercicio_2", self.legacy_exercicio_2),
+            ("/exercicio_2_html", "legacy_exercicio_2_html", self.legacy_exercicio_2),
+            ("/exercicio_3", "legacy_exercicio_3", self.legacy_exercicio_3),
+            ("/exercicio_3_html", "legacy_exercicio_3_html", self.legacy_exercicio_3),
+            ("/exercicio_4", "legacy_exercicio_4", self.legacy_exercicio_4),
+            ("/exercicio_4_html", "legacy_exercicio_4_html", self.legacy_exercicio_4),
         ]
 
-        super().__init__ (app)
-    
+        super().__init__(app, login_required)
 
-    def pagina_inicial (self):
-        return render_template ("pagina_inicial.html")
-    
-    def exercicio_1 (self):
-        return render_template ("exercicio_1_html.html")
-    
+    def lista(self):
+        return self.renderizar_lista()
+
+    def exercicio_1(self):
+        return self.renderizar_exercicio("exercicio-1-html")
+
     def exercicio_2(self):
-        return render_template ("exercicio_2_html.html")
-    
+        return self.renderizar_exercicio("exercicio-2-html")
+
     def exercicio_3(self):
-        return render_template ("exercicio_3_html.html")
-    
+        return self.renderizar_exercicio("exercicio-3-html")
+
     def exercicio_4(self):
-        return render_template ("exercicio_4_html.html")
-    
+        return self.renderizar_exercicio("exercicio-4-html")
+
+    def legacy_exercicio_1(self):
+        return self.redirecionar_para_exercicio("exercicio-1-html")
+
+    def legacy_exercicio_2(self):
+        return self.redirecionar_para_exercicio("exercicio-2-html")
+
+    def legacy_exercicio_3(self):
+        return self.redirecionar_para_exercicio("exercicio-3-html")
+
+    def legacy_exercicio_4(self):
+        return self.redirecionar_para_exercicio("exercicio-4-html")

@@ -26,9 +26,7 @@
         </div>
         <div class="card-footer">
           <span>Exercicio feito</span>
-          <a
-            href="{{ url_for('exercise_detail', list_slug=selected_list.slug, exercise_slug=exercise.slug) }}"
-          >
+          <a href="{{ exercise.url }}">
             Abrir
           </a>
         </div>

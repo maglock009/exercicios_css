@@ -6,7 +6,8 @@
 Aplicação Flask única (server-rendered), o "Portal de Exercícios". Não há banco de
 dados, cache, fila ou serviços externos — todo o conteúdo é derivado dos arquivos
 `.html` em `exercicios_flask/templates/` e `exercicios_formularios/templates/`
-(ver `exercise_data.py`). Detalhes gerais de setup estão no `README`.
+e registrado explicitamente pelos controllers. Detalhes gerais de setup estão no
+`README`.
 
 ### Como rodar
 - Serviço único: `python3 app.py` → serve em `http://127.0.0.1:5000` (Flask, `debug=True`).
@@ -30,4 +31,5 @@ dados, cache, fila ou serviços externos — todo o conteúdo é derivado dos ar
 - A sidebar retrátil guarda o estado (recolhida/expandida) em `localStorage`
   (`sidebar-collapsed`). Após recolher uma vez, ela permanece recolhida em logins
   seguintes até ser expandida novamente — isso é intencional.
-- O pacote `exercicios_flask/controllers/` é código legado e não é usado por `app.py`.
+- Os pacotes `exercicios_flask/controllers/` e `exercicios_formularios/controllers/`
+  registram as rotas de cada exercício no `app.py`.

@@ -27,7 +27,7 @@
         </div>
         <div class="card-footer">
           <span>{{ exercise_list.exercises|length }} arquivos</span>
-          <a href="{{ url_for('exercise_list', list_slug=exercise_list.slug) }}">
+          <a href="{{ exercise_list.url }}">
             Ver exercicios
           </a>
         </div>

@@ -25,7 +25,7 @@
               <section class="nav-group">
                 <a
                   class="nav-list-title {% if selected_list and selected_list.slug == exercise_list.slug %}active{% endif %}"
-                  href="{{ url_for('exercise_list', list_slug=exercise_list.slug) }}"
+                  href="{{ exercise_list.url }}"
                 >
                   {{ exercise_list.title }}
                 </a>
@@ -33,7 +33,7 @@
                   {% for exercise in exercise_list.exercises %}
                     <li>
                       <a
-                        href="{{ url_for('exercise_detail', list_slug=exercise_list.slug, exercise_slug=exercise.slug) }}"
+                        href="{{ exercise.url }}"
                         class="{% if selected_exercise and selected_exercise.slug == exercise.slug %}active{% endif %}"
                       >
                         {{ exercise.title }}

@@ -35,12 +35,12 @@
       {% if next_exercise %}
         <a
           class="next-exercise-link"
-          href="{{ url_for('exercise_detail', list_slug=selected_list.slug, exercise_slug=next_exercise.slug) }}"
+          href="{{ next_exercise.url }}"
         >
           Ir para o próximo exercício
         </a>
       {% else %}
-        <a class="next-exercise-link" href="{{ url_for('exercise_list', list_slug=selected_list.slug) }}">
+        <a class="next-exercise-link" href="{{ selected_list.url }}">
           Voltar para a lista
         </a>
       {% endif %}
