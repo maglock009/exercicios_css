@@ -8,26 +8,30 @@
 {% endblock %}
 
 {% block content %}
-  <article class="exercise-panel">
+  <article class="exercise-panel perfil-profissional">
     <header class="exercise-header">
       <div>
         <p class="eyebrow">{{ selected_list.title }}</p>
         <h1>Miguel Dias do Canto</h1>
-        <p>Formação</p>
+        <h2>Perfil Profissional</h2>
+        <p>Formacao e objetivo de carreira</p>
       </div>
-      <a class="back-link" href="{{ url_for('home') }}">Página inicial</a>
+      <a class="back-link" href="{{ url_for('home') }}">Pagina inicial</a>
     </header>
 
-    <section class="exercise-body">
-      <p>
-        <strong>Formado em ciências jurídicas e sociais</strong> em 2024, mesmo ano em que
-        obtive <strong>a carteira da OAB.</strong> Atualmente estou cursando análise e
-        desenvolvimento em softwares no Senac Tech.
-      </p>
-      <p>com o objetivo de <em>integrar meu conhecimento jurídico com a programação.</em></p>
-      <p>Para acessar meu portfólio de programação clique abaixo.</p>
-      <a href="https://github.com/repos?q=owner%3A%40me">GitHub</a>
-    </section>
+    <main>
+      <section class="exercise-body">
+        <h3>Sobre mim</h3>
+        <p>
+          <strong>Formado em ciencias juridicas e sociais</strong> em 2024, mesmo ano em que
+          obtive <strong>a carteira da OAB.</strong> Atualmente estou cursando analise e
+          desenvolvimento em softwares no Senac Tech.
+        </p>
+        <p>com o objetivo de <em>integrar meu conhecimento juridico com a programacao.</em></p>
+        <p>Para acessar meu portfolio de programacao clique abaixo.</p>
+        <a href="https://github.com/repos?q=owner%3A%40me">GitHub</a>
+      </section>
+    </main>
 
     <footer class="exercise-actions">
       {% if next_exercise %}
@@ -35,7 +39,7 @@
           class="next-exercise-link"
           href="{{ next_exercise.url }}"
         >
-          Ir para o próximo exercício
+          Ir para o proximo exercicio
         </a>
       {% else %}
         <a class="next-exercise-link" href="{{ selected_list.url }}">

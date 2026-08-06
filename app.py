@@ -1,8 +1,7 @@
 from functools import wraps
 from pathlib import Path
 
-from flask import Flask, redirect, render_template, request, send_from_directory, session, url_for
-from jinja2 import ChoiceLoader, FileSystemLoader, PrefixLoader
+from flask import Flask, redirect, render_template, request, session, url_for
 
 from controllers.formularios_controller import FormulariosController
 from controllers.html_basico_controller import HTMLBasicoController
@@ -13,21 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent
 
 app = Flask(__name__)
 app.secret_key = "123456"
-app.jinja_loader = ChoiceLoader(
-    [
-        app.jinja_loader,
-        PrefixLoader(
-            {
-                "exercicios_flask": FileSystemLoader(
-                    str(BASE_DIR / "exercicios_flask" / "templates")
-                ),
-                "exercicios_formularios": FileSystemLoader(
-                    str(BASE_DIR / "exercicios_formularios" / "templates")
-                ),
-            }
-        ),
-    ]
-)
 
 
 def login_required(view):
@@ -79,12 +63,6 @@ def home():
 def logout():
     session.clear()
     return redirect(url_for("login"))
-
-
-@app.route("/exercicios-flask/static/<path:filename>")
-@login_required
-def flask_static(filename):
-    return send_from_directory(BASE_DIR / "exercicios_flask" / "static", filename)
 
 
 exercise_controllers = [

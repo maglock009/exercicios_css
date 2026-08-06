@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% set title = selected_exercise.title ~ " - Exercicios Flask" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/exercise.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='exercises/exercicio-3-html.css') }}">
+{% endblock %}
+
+{% block content %}
+  <article class="exercise-panel pagina-tecnologia">
+    <header class="exercise-header">
+      <div>
+        <p class="eyebrow">{{ selected_list.title }}</p>
+        <h1>Python</h1>
+        <p>Codando</p>
+      </div>
+      <a class="back-link" href="{{ url_for('home') }}">Pagina inicial</a>
+    </header>
+
+    <main>
+      <section class="exercise-body">
+        <p>
+          O <span>python</span> e uma <em>linguagem de programacao</em>
+          <strong>acessivel</strong>, na medida em que sua sintaxe e mais
+          <strong>clara</strong>.
+        </p>
+        <img
+          class="exercise-image"
+          src="{{ url_for('static', filename='images/python.png') }}"
+          alt="Imagem representando python"
+        >
+        <h2>Vantagens</h2>
+        <p>
+          O fato de o <span>python</span> ser uma linguagem mais simples de se entender
+          tornou a linguagem <strong>ideal para interacao com IAs</strong>, pois amplificou
+          o <strong>machine learning</strong>.
+        </p>
+        <p>Para acessar a documentacao de python, clique no link abaixo:</p>
+        <a href="https://docs.python.org/pt-br/3/">Documentacao Python</a>
+      </section>
+    </main>
+
+    <footer class="exercise-actions">
+      {% if next_exercise %}
+        <a
+          class="next-exercise-link"
+          href="{{ next_exercise.url }}"
+        >
+          Ir para o proximo exercicio
+        </a>
+      {% else %}
+        <a class="next-exercise-link" href="{{ selected_list.url }}">
+          Voltar para a lista
+        </a>
+      {% endif %}
+    </footer>
+  </article>
+{% endblock %}

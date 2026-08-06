@@ -2,7 +2,21 @@
   color: var(--primary-dark);
 }
 
+.hero {
+  margin-bottom: 0.25rem;
+}
+
 .list-card code {
   color: var(--primary-dark);
   font-weight: 800;
+}
+
+.list-card a {
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.list-card a:hover {
+  background: var(--primary-dark);
+  color: #dbeafe;
+  transform: translateY(-1px);
 }

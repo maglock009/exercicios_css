@@ -1,0 +1,83 @@
+.pagina-tabelas {
+  color: #1e293b;
+  line-height: 1.7;
+}
+
+.pagina-tabelas header {
+  margin-bottom: 0;
+}
+
+.pagina-tabelas main {
+  display: block;
+}
+
+.pagina-tabelas section {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+}
+
+.pagina-tabelas footer {
+  margin-top: 1.5rem;
+}
+
+.pagina-tabelas h2 {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 1.2rem;
+  color: #0f172a;
+}
+
+.pagina-tabelas p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #334155;
+}
+
+.pagina-tabelas table {
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+
+.pagina-tabelas th,
+.pagina-tabelas td {
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #cbd5e1;
+  text-align: left;
+}
+
+.pagina-tabelas thead th,
+.pagina-tabelas th {
+  background-color: #1e40af;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.pagina-tabelas tbody td {
+  background-color: #ffffff;
+  color: #334155;
+}
+
+.pagina-tabelas tbody tr:nth-child(even) td {
+  background-color: #f1f5f9;
+}
+
+.pagina-tabelas tbody tr:hover td {
+  background-color: #dbeafe;
+}
+
+.pagina-tabelas tfoot td {
+  background-color: #e2e8f0;
+  font-weight: 700;
+}
+
+.pagina-tabelas a {
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pagina-tabelas a:hover {
+  color: #1e40af;
+  text-decoration: underline;
+}

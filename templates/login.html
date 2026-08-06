@@ -7,18 +7,22 @@
 {% endblock %}
 
 {% block public_content %}
+  <header class="login-page-header">
+    <h1 id="login-title">Portal de Exercicios</h1>
+  </header>
+
   <main class="login-wrapper">
     <section class="login-card" aria-labelledby="login-title">
-      <div class="login-header">
+      <div class="login-brand">
         <span class="brand-mark large">E</span>
-        <div>
-          <p class="eyebrow">Acesso restrito</p>
-          <h1 id="login-title">Portal de Exercicios</h1>
-        </div>
+        <p class="eyebrow">Acesso restrito</p>
       </div>
 
       <p class="login-description">
         Entre para acessar o menu dos exercicios ja feitos nas pastas do projeto.
+        O atributo <strong>required</strong> obriga o preenchimento dos campos
+        antes do envio. O formulario utiliza o metodo
+        <em>POST</em> para enviar usuario e senha de forma adequada.
       </p>
 
       {% if error %}
@@ -49,8 +53,16 @@
           required
         >
 
-        <button type="submit">Entrar</button>
+        <input type="submit" value="Entrar">
       </form>
+
+      <p class="login-home-link">
+        <a href="{{ url_for('home') }}">Retornar a pagina inicial</a>
+      </p>
     </section>
   </main>
+
+  <footer class="login-page-footer">
+    <p>Portal de Exercicios Flask</p>
+  </footer>
 {% endblock %}

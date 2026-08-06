@@ -1,0 +1,86 @@
+.pagina-listas {
+  color: #1e293b;
+  line-height: 1.7;
+}
+
+.pagina-listas header {
+  margin-bottom: 0;
+}
+
+.pagina-listas main {
+  display: block;
+}
+
+.pagina-listas section {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+}
+
+.pagina-listas footer {
+  margin-top: 1.5rem;
+}
+
+.pagina-listas h1,
+.pagina-listas h2,
+.pagina-listas p {
+  color: #0f172a;
+}
+
+.pagina-listas h2 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.pagina-listas p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #334155;
+}
+
+.pagina-listas ul {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.5rem;
+  list-style-type: square;
+}
+
+.pagina-listas ol {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.5rem;
+  list-style-type: decimal;
+}
+
+.pagina-listas li {
+  margin: 0.35rem 0;
+  padding-left: 0.25rem;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.pagina-listas dl {
+  margin: 0.5rem 0 1rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #2563eb;
+  background: #f8fafc;
+}
+
+.pagina-listas dt {
+  margin-top: 0.65rem;
+  color: #1e40af;
+  font-weight: 800;
+}
+
+.pagina-listas dd {
+  margin: 0.2rem 0 0.5rem 1rem;
+  color: #475569;
+}
+
+.pagina-listas a {
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pagina-listas a:hover {
+  color: #1e40af;
+  text-decoration: underline;
+}

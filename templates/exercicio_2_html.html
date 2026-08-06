@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% set title = selected_exercise.title ~ " - Exercicios Flask" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/exercise.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='exercises/exercicio-2-html.css') }}">
+{% endblock %}
+
+{% block content %}
+  <article class="exercise-panel pagina-institucional">
+    <header class="exercise-header">
+      <div>
+        <p class="eyebrow">{{ selected_list.title }}</p>
+        <h1>Seja bem-vindo a Softwares Tech</h1>
+        <p>Somos especializados em fornecer a solucao necessaria para seu problema com softwares.</p>
+      </div>
+      <a class="back-link" href="{{ url_for('home') }}">Pagina inicial</a>
+    </header>
+
+    <nav class="institucional-nav" aria-label="Secoes da empresa">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Servicos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <main>
+      <section id="sobre" class="exercise-body">
+        <img
+          class="exercise-image"
+          src="{{ url_for('static', filename='images/tecnologia.jpg') }}"
+          alt="Imagem representando tecnologia"
+        >
+        <p id="servicos">
+          <strong>Somos especializados</strong> em <strong>solucoes automatizadas</strong>
+          para integracoes entre seus softwares.
+        </p>
+        <p id="contato">
+          Entre em contato e trabalharemos com uma
+          <em>solucao personalizada para o seu problema.</em>
+        </p>
+      </section>
+    </main>
+
+    <footer class="exercise-actions">
+      {% if next_exercise %}
+        <a
+          class="next-exercise-link"
+          href="{{ next_exercise.url }}"
+        >
+          Ir para o proximo exercicio
+        </a>
+      {% else %}
+        <a class="next-exercise-link" href="{{ selected_list.url }}">
+          Voltar para a lista
+        </a>
+      {% endif %}
+    </footer>
+  </article>
+{% endblock %}

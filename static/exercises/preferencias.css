@@ -1,11 +1,18 @@
 .sample-form fieldset {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
   background: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
 }
 
 .sample-form select:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
   outline: none;
+}
+
+.sample-form input[type="submit"] {
+  margin-top: 0.5rem;
 }
 
 .student-list li::before {

@@ -1,0 +1,79 @@
+.divs-spans {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #1e293b;
+  line-height: 1.7;
+}
+
+.divs-spans header {
+  margin-bottom: 0;
+}
+
+.divs-spans main {
+  display: block;
+}
+
+.divs-spans section {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+}
+
+.divs-spans footer {
+  margin-top: 1.5rem;
+}
+
+.divs-spans p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #334155;
+}
+
+.divs-spans h1,
+.divs-spans h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #0f172a;
+}
+
+.divs-spans h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.divs-spans div.bloco-exemplo {
+  margin: 1rem 0;
+  padding: 1rem 1.15rem;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.divs-spans div.bloco-conceito {
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
+}
+
+.divs-spans div.bloco-pratica {
+  background: #ecfdf5;
+  border: 1px solid #6ee7b7;
+}
+
+.divs-spans span {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.divs-spans span.destaque-inline {
+  color: #b45309;
+  background: #ffedd5;
+  padding: 0.1rem 0.35rem;
+  border-radius: 6px;
+}
+
+.divs-spans a {
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.divs-spans a:hover {
+  color: #1e40af;
+  text-decoration: underline;
+}

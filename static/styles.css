@@ -91,6 +91,7 @@ p {
   border-right: 1px solid var(--border);
   background: #0f172a;
   color: #e2e8f0;
+  box-shadow: 8px 0 28px rgba(15, 23, 42, 0.28);
   transition: padding 0.25s ease, opacity 0.2s ease;
 }
 
@@ -124,6 +125,7 @@ p {
 .nav-group a {
   display: block;
   border-radius: 14px;
+  transition: background 0.25s ease, color 0.25s ease, padding 0.25s ease;
 }
 
 .nav-home {
@@ -131,6 +133,11 @@ p {
   background: rgba(37, 99, 235, 0.18);
   color: #ffffff;
   font-weight: 800;
+}
+
+.nav-home:hover {
+  background: rgba(37, 99, 235, 0.35);
+  color: #ffffff;
 }
 
 .nav-group {
@@ -144,6 +151,11 @@ p {
   padding: 0.55rem 0.65rem;
   color: #ffffff;
   font-weight: 800;
+}
+
+.nav-list-title:hover {
+  background: rgba(37, 99, 235, 0.22);
+  color: #ffffff;
 }
 
 .nav-list-title.active {
@@ -183,7 +195,7 @@ p {
   border: 1px solid var(--border);
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
 }
 
 .topbar-left {
@@ -253,11 +265,30 @@ p {
   border-radius: 999px;
   color: var(--muted);
   font-weight: 800;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
 }
 
 .logout-link:hover {
   border-color: var(--primary);
   color: var(--primary);
+  background: #eff6ff;
+}
+
+.app-footer {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #0f172a;
+  color: #e2e8f0;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 820px) {

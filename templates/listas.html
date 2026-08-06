@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% set title = selected_exercise.title ~ " - Exercicios Flask" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/exercise.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='exercises/listas.css') }}">
+{% endblock %}
+
+{% block content %}
+  <article class="exercise-panel pagina-listas">
+    <header class="exercise-header">
+      <div>
+        <p class="eyebrow">{{ selected_list.title }}</p>
+        <h1>Listas em HTML</h1>
+        <p>Organizacao de itens com listas nao ordenadas, ordenadas e de definicao.</p>
+      </div>
+      <a class="back-link" href="{{ url_for('home') }}">Pagina inicial</a>
+    </header>
+
+    <main>
+      <section class="exercise-body">
+        <p>
+          As listas em HTML organizam conjuntos de informacoes. A diferenca entre
+          as tags <strong>ul</strong>, <strong>ol</strong> e <strong>dl</strong>
+          esta no tipo de relacao entre os itens: a <strong>ul</strong> cria uma
+          lista nao ordenada, a <strong>ol</strong> cria uma lista ordenada e a
+          <strong>dl</strong> cria uma lista de definicoes com termos e descricoes.
+        </p>
+        <p>
+          Use listas <em>ordenadas</em> quando a sequencia dos itens importa
+          (passos, ranking) e listas <em>nao ordenadas</em> quando a ordem nao
+          altera o sentido do conteudo.
+        </p>
+
+        <h2>Lista nao ordenada</h2>
+        <ul>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>Flask</li>
+        </ul>
+
+        <h2>Lista ordenada</h2>
+        <ol>
+          <li>Planejar a estrutura da pagina</li>
+          <li>Escrever o HTML semantico</li>
+          <li>Aplicar o CSS</li>
+        </ol>
+
+        <h2>Lista de definicao</h2>
+        <dl>
+          <dt>ul</dt>
+          <dd>Lista nao ordenada, marcada com bullets.</dd>
+          <dt>ol</dt>
+          <dd>Lista ordenada, marcada com numeros.</dd>
+          <dt>dl</dt>
+          <dd>Lista de definicao, com termos (dt) e descricoes (dd).</dd>
+        </dl>
+
+        <p>
+          <a href="{{ url_for('home') }}">Retornar a pagina inicial</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="exercise-actions">
+      {% if next_exercise %}
+        <a
+          class="next-exercise-link"
+          href="{{ next_exercise.url }}"
+        >
+          Ir para o proximo exercicio
+        </a>
+      {% else %}
+        <a class="next-exercise-link" href="{{ selected_list.url }}">
+          Voltar para a lista
+        </a>
+      {% endif %}
+    </footer>
+  </article>
+{% endblock %}

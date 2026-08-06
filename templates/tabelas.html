@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% set title = selected_exercise.title ~ " - Exercicios Flask" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/exercise.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='exercises/tabelas.css') }}">
+{% endblock %}
+
+{% block content %}
+  <article class="exercise-panel pagina-tabelas">
+    <header class="exercise-header">
+      <div>
+        <p class="eyebrow">{{ selected_list.title }}</p>
+        <h1>Tabelas em HTML</h1>
+        <p>Organizacao de dados tabulares com estrutura e mesclagem de celulas.</p>
+      </div>
+      <a class="back-link" href="{{ url_for('home') }}">Pagina inicial</a>
+    </header>
+
+    <main>
+      <section class="exercise-body">
+        <p>
+          A tag <strong>table</strong> organiza dados em linhas e colunas.
+          As tags <strong>thead</strong>, <strong>tbody</strong> e
+          <strong>tfoot</strong> separam o cabecalho, o corpo e o rodape da
+          tabela, facilitando a leitura e a manutencao do codigo.
+        </p>
+        <p>
+          A <em>organizacao dos dados em tabelas</em> e importante para
+          apresentar informacoes comparativas de forma clara e acessivel.
+        </p>
+
+        <h2>Tabela simples</h2>
+        <table>
+          <tr>
+            <th>Linguagem</th>
+            <th>Tipo</th>
+          </tr>
+          <tr>
+            <td>HTML</td>
+            <td>Marcacao</td>
+          </tr>
+          <tr>
+            <td>CSS</td>
+            <td>Estilo</td>
+          </tr>
+          <tr>
+            <td>Python</td>
+            <td>Programacao</td>
+          </tr>
+        </table>
+
+        <h2>Tabela com thead, tbody e tfoot</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Nota</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ana</td>
+              <td>8.5</td>
+            </tr>
+            <tr>
+              <td>Bruno</td>
+              <td>9.0</td>
+            </tr>
+            <tr>
+              <td>Carla</td>
+              <td>7.5</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Media</td>
+              <td>8.3</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <h2>Exemplo com colspan</h2>
+        <table>
+          <tr>
+            <th colspan="2">Horario de aulas</th>
+          </tr>
+          <tr>
+            <td>Segunda</td>
+            <td>Flask</td>
+          </tr>
+          <tr>
+            <td>Terca</td>
+            <td>HTML e CSS</td>
+          </tr>
+        </table>
+
+        <h2>Exemplo com rowspan</h2>
+        <table>
+          <tr>
+            <th rowspan="2">Modulo</th>
+            <th>Conteudo</th>
+          </tr>
+          <tr>
+            <td>Formularios e Login</td>
+          </tr>
+          <tr>
+            <td>Frontend</td>
+            <td>Tabelas e Listas</td>
+          </tr>
+        </table>
+
+        <p>
+          <a href="{{ url_for('home') }}">Retornar a pagina inicial</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="exercise-actions">
+      {% if next_exercise %}
+        <a
+          class="next-exercise-link"
+          href="{{ next_exercise.url }}"
+        >
+          Ir para o proximo exercicio
+        </a>
+      {% else %}
+        <a class="next-exercise-link" href="{{ selected_list.url }}">
+          Voltar para a lista
+        </a>
+      {% endif %}
+    </footer>
+  </article>
+{% endblock %}

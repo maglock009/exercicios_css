@@ -1,19 +1,89 @@
-.exercise-body strong {
-  color: var(--primary-dark);
+.perfil-profissional * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.exercise-body a {
+.perfil-profissional {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #0f172a;
+  text-align: left;
+}
+
+.perfil-profissional header {
+  margin-bottom: 0;
+  padding: 1.25rem 1.5rem;
+  background: #eff6ff;
+  border-bottom: 1px solid #bfdbfe;
+  text-align: left;
+}
+
+.perfil-profissional main {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.perfil-profissional section {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 16px;
+}
+
+.perfil-profissional footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+}
+
+.perfil-profissional h1,
+.perfil-profissional h2,
+.perfil-profissional h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #1e3a8a;
+  line-height: 1.25;
+}
+
+.perfil-profissional h1 {
+  margin-bottom: 0.4rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.perfil-profissional h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.perfil-profissional h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.15rem;
+}
+
+.perfil-profissional p {
+  margin: 0.75rem 0;
+  color: #334155;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.perfil-profissional strong {
+  color: #1e40af;
+}
+
+.perfil-profissional a {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 0.5rem;
   padding: 0.7rem 1rem;
   border-radius: 999px;
-  background: var(--primary);
+  background: #2563eb;
   color: #ffffff;
   font-weight: 800;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
-.exercise-body a:hover {
-  background: var(--primary-dark);
+.perfil-profissional a:hover {
+  background: #1e40af;
+  color: #dbeafe;
 }

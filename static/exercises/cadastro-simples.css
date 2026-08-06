@@ -1,7 +1,21 @@
-.sample-form input:focus {
+.sample-form input[type="text"]:focus,
+.sample-form input[type="email"]:focus,
+.sample-form input[type="password"]:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
   outline: none;
+}
+
+.sample-form input[type="text"] {
+  border-left: 4px solid #2563eb;
+}
+
+.sample-form input[type="email"] {
+  border-left: 4px solid #0f766e;
+}
+
+.sample-form input[type="submit"] {
+  letter-spacing: 0.02em;
 }
 
 .student-list li::before {

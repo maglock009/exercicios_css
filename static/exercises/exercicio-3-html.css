@@ -1,19 +1,78 @@
-.exercise-body span {
-  color: var(--primary-dark);
-  font-weight: 800;
+.pagina-tecnologia {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #0f172a;
+  text-align: left;
 }
 
-.exercise-body a {
+.pagina-tecnologia header {
+  text-align: left;
+}
+
+.pagina-tecnologia h1 {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #0f766e;
+  text-align: left;
+  line-height: 1.15;
+}
+
+.pagina-tecnologia h2 {
+  margin: 1.25rem 0 0.75rem;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #115e59;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.pagina-tecnologia p {
+  margin: 0.85rem 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: 1.08rem;
+  font-weight: 400;
+  color: #334155;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.pagina-tecnologia strong {
+  font-weight: 800;
+  color: #0f766e;
+}
+
+.pagina-tecnologia em {
+  font-style: italic;
+  color: #0e7490;
+}
+
+.pagina-tecnologia span {
+  font-weight: 800;
+  color: #b45309;
+}
+
+.pagina-tecnologia img {
+  display: block;
+  max-width: 100%;
+  width: min(100%, 420px);
+  margin: 1rem auto;
+  border-radius: 16px;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
+}
+
+.pagina-tecnologia a {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: 0.7rem 1rem;
   border-radius: 999px;
-  background: var(--primary);
+  background: #0f766e;
   color: #ffffff;
   font-weight: 800;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
-.exercise-body a:hover {
-  background: var(--primary-dark);
+.pagina-tecnologia a:hover {
+  background: #115e59;
+  color: #ccfbf1;
 }

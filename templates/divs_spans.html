@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% set title = selected_exercise.title ~ " - Exercicios Flask" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/exercise.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='exercises/divs-spans.css') }}">
+{% endblock %}
+
+{% block content %}
+  <article class="exercise-panel divs-spans">
+    <header class="exercise-header">
+      <div>
+        <p class="eyebrow">{{ selected_list.title }}</p>
+        <h1>Divs e Spans em HTML</h1>
+        <p>Organizacao de conteudo com elementos de bloco e em linha.</p>
+      </div>
+      <a class="back-link" href="{{ url_for('home') }}">Pagina inicial</a>
+    </header>
+
+    <main>
+      <section class="exercise-body">
+        <p>
+          As tags <strong>div</strong> e <strong>span</strong> sao usadas para
+          agrupar conteudo em HTML. A tag <strong>div</strong> funciona como
+          elemento de bloco, ocupando toda a largura disponivel e iniciando em
+          uma nova linha. Ja a tag <em>span</em> e um elemento em linha (inline),
+          usado para destacar trechos dentro de um texto sem quebrar o fluxo.
+        </p>
+
+        <div class="bloco-exemplo bloco-conceito">
+          <h2>Exemplo de div 1</h2>
+          <p>
+            Esta primeira <strong>div</strong> agrupa um bloco de conceito sobre
+            elementos de estrutura.
+          </p>
+        </div>
+
+        <div class="bloco-exemplo bloco-pratica">
+          <h2>Exemplo de div 2</h2>
+          <p>
+            Esta segunda <strong>div</strong> apresenta um bloco diferente,
+            mostrando que cada div pode receber conteudo e estilo proprios.
+          </p>
+        </div>
+
+        <p>
+          Neste paragrafo, o trecho
+          <span class="destaque-inline">elemento em linha</span>
+          esta marcado com <em>span</em>, enquanto o restante do texto segue
+          normalmente no mesmo fluxo.
+        </p>
+
+        <p>
+          <a href="{{ url_for('home') }}">Retornar a pagina inicial</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="exercise-actions">
+      {% if next_exercise %}
+        <a
+          class="next-exercise-link"
+          href="{{ next_exercise.url }}"
+        >
+          Ir para o proximo exercicio
+        </a>
+      {% else %}
+        <a class="next-exercise-link" href="{{ selected_list.url }}">
+          Voltar para a lista
+        </a>
+      {% endif %}
+    </footer>
+  </article>
+{% endblock %}

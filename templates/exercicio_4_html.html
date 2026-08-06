@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% set title = selected_exercise.title ~ " - Exercicios Flask" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/exercise.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='exercises/exercicio-4-html.css') }}">
+{% endblock %}
+
+{% block content %}
+  <article class="exercise-panel pagina-documentacao">
+    <header class="exercise-header">
+      <div>
+        <p class="eyebrow">{{ selected_list.title }}</p>
+        <h1>HTML</h1>
+        <p>Documentacao do projeto</p>
+      </div>
+      <a class="back-link" href="{{ url_for('home') }}">Pagina inicial</a>
+    </header>
+
+    <main>
+      <section class="exercise-body">
+        <p>
+          O <span>HTML</span> e uma <em>linguagem de marcacao</em>
+          <strong>voltada ao front-end</strong>, isto e,
+          <strong>focada em produzir a estrutura da pagina</strong>.
+        </p>
+        <h2>Vantagens</h2>
+        <p>
+          O fato de o <span>HTML</span> ser uma linguagem focada em front-end tornou a
+          linguagem <strong>ideal para design web.</strong>
+        </p>
+        <p>
+          Consulte a
+          <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML">documentacao oficial do HTML</a>
+          e a
+          <a href="https://www.w3.org/html/">referencia da W3C</a>
+          para aprofundar o estudo.
+        </p>
+      </section>
+    </main>
+
+    <footer class="exercise-actions">
+      {% if next_exercise %}
+        <a
+          class="next-exercise-link"
+          href="{{ next_exercise.url }}"
+        >
+          Ir para o proximo exercicio
+        </a>
+      {% else %}
+        <a class="next-exercise-link" href="{{ selected_list.url }}">
+          Voltar para a lista
+        </a>
+      {% endif %}
+    </footer>
+  </article>
+{% endblock %}

@@ -4,18 +4,18 @@ from controllers.base_controller import BaseController
 class FormulariosController(BaseController):
 
     list_title = "Exercicios Formularios"
-    folder = "exercicios_formularios"
+    folder = "templates"
     list_url = "/listas/exercicios-formularios"
 
     pagina_cadastro_simples = {
         "title": "Cadastro Simples",
-        "template": "exercicios_formularios/cadastro_simples.html",
+        "template": "cadastro_simples.html",
         "filename": "cadastro_simples.html",
         "url": "/listas/exercicios-formularios/cadastro-simples",
     }
     pagina_preferencias = {
         "title": "Preferencias",
-        "template": "exercicios_formularios/preferencias.html",
+        "template": "preferencias.html",
         "filename": "preferencias.html",
         "url": "/listas/exercicios-formularios/preferencias",
     }
