@@ -48,7 +48,15 @@
       </div>
 
       <label for="email">E-mail</label>
-      <input id="email" name="email" type="text" value="{{ usuario.email }}" required>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        value="{{ usuario.email }}"
+        placeholder="usuario@exemplo.com"
+        required
+      >
+      <p class="field-hint">Use um e-mail em formato válido.</p>
 
       <label for="data_nascimento">Data de nascimento</label>
       <input
@@ -56,8 +64,10 @@
         name="data_nascimento"
         type="date"
         value="{{ usuario.data_nascimento }}"
+        max="{{ data_maxima_nascimento }}"
         required
       >
+      <p class="field-hint">O usuário precisa ter 18 anos ou mais.</p>
 
       <label for="papel">Papel</label>
       <select id="papel" name="papel">

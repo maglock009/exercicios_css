@@ -1,3 +1,5 @@
+from datetime import date
+
 from flask import redirect, render_template, request, send_file, session, url_for
 
 from controllers.base_controller import BaseController
@@ -65,6 +67,14 @@ class UsuarioController(BaseController):
         ]
         super().__init__(app, login_required)
 
+    @staticmethod
+    def _data_maxima_nascimento() -> str:
+        hoje = date.today()
+        try:
+            return hoje.replace(year=hoje.year - 18).isoformat()
+        except ValueError:
+            return hoje.replace(year=hoje.year - 18, day=28).isoformat()
+
     def listar(self):
         usuarios = self.usuario_service.listar()
         return render_template(
@@ -75,20 +85,35 @@ class UsuarioController(BaseController):
 
     def cadastrar(self):
         erro = None
+        form = {
+            "email": "",
+            "data_nascimento": "",
+            "papel": "usuario",
+        }
         if request.method == "POST":
+            form = {
+                "email": request.form.get("email", "").strip(),
+                "data_nascimento": request.form.get("data_nascimento", ""),
+                "papel": request.form.get("papel", "usuario"),
+            }
             try:
                 self.usuario_service.cadastrar(
-                    email=request.form.get("email", "").strip(),
+                    email=form["email"],
                     senha=request.form.get("senha", ""),
-                    data_nascimento=request.form.get("data_nascimento", ""),
-                    papel=request.form.get("papel", "usuario"),
+                    data_nascimento=form["data_nascimento"],
+                    papel=form["papel"],
                     autor_id=session.get("usuario_id"),
                 )
                 return redirect(url_for("usuarios"))
             except ValueError as exc:
                 erro = str(exc)
 
-        return render_template("html_usuarios/cadastrar_usuario.html", erro=erro)
+        return render_template(
+            "html_usuarios/cadastrar_usuario.html",
+            erro=erro,
+            form=form,
+            data_maxima_nascimento=self._data_maxima_nascimento(),
+        )
 
     def editar(self, usuario_id):
         usuario = self.usuario_service.buscar_por_id(usuario_id)
@@ -124,6 +149,7 @@ class UsuarioController(BaseController):
             usuario=usuario,
             imagem_url=ImagemService.url_publica(usuario.get("imagem_caminho")),
             erro=erro,
+            data_maxima_nascimento=self._data_maxima_nascimento(),
         )
 
     def confirmar_exclusao(self, usuario_id):
@@ -181,6 +207,7 @@ class UsuarioController(BaseController):
             imagem_url=ImagemService.url_publica(usuario.get("imagem_caminho")),
             erro=erro,
             sucesso=sucesso,
+            data_maxima_nascimento=self._data_maxima_nascimento(),
         )
 
     def relatorio(self):
