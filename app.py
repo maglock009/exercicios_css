@@ -54,6 +54,11 @@ def login():
             session["username"] = usuario["email"]
             session["usuario_id"] = usuario["id"]
             session["papel"] = usuario["papel"]
+            session["imagem_perfil"] = (
+                f"/static/{usuario['imagem_caminho']}"
+                if usuario.get("imagem_caminho")
+                else None
+            )
             return redirect(url_for("home"))
 
         error = "Usuario ou senha invalidos."

@@ -28,9 +28,46 @@ CREATE TABLE IF NOT EXISTS auditoria (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 """
 
+DDL_IMAGENS = """
+CREATE TABLE IF NOT EXISTS imagens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_original VARCHAR(255) NOT NULL,
+    nome_armazenado VARCHAR(255) NOT NULL,
+    caminho VARCHAR(500) NOT NULL,
+    tipo_mime VARCHAR(100) NOT NULL,
+    tamanho INT NOT NULL,
+    data_upload DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+"""
+
 
 def _hash_senha(senha: str) -> str:
     return bcrypt.hashpw(senha.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+
+
+def _garantir_coluna_imagem_perfil(cursor, conexao):
+    cursor.execute(
+        """
+        SELECT COUNT(*) AS total
+        FROM information_schema.COLUMNS
+        WHERE TABLE_SCHEMA = DATABASE()
+          AND TABLE_NAME = 'usuarios'
+          AND COLUMN_NAME = 'imagem_perfil_id'
+        """
+    )
+    if cursor.fetchone()["total"]:
+        return
+
+    cursor.execute(
+        """
+        ALTER TABLE usuarios
+        ADD COLUMN imagem_perfil_id INT NULL,
+        ADD CONSTRAINT fk_usuarios_imagem_perfil
+            FOREIGN KEY (imagem_perfil_id) REFERENCES imagens(id)
+            ON DELETE SET NULL
+        """
+    )
+    conexao.commit()
 
 
 def inicializar_banco():
@@ -42,7 +79,9 @@ def inicializar_banco():
         cursor = conexao.cursor(dictionary=True)
         cursor.execute(DDL_USUARIOS)
         cursor.execute(DDL_AUDITORIA)
+        cursor.execute(DDL_IMAGENS)
         conexao.commit()
+        _garantir_coluna_imagem_perfil(cursor, conexao)
 
         cursor.execute("SELECT id FROM usuarios WHERE email = %s", ("Miguel",))
         existente = cursor.fetchone()
