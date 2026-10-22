@@ -21,6 +21,20 @@
 
           <nav class="sidebar-nav">
             <a class="nav-home" href="{{ url_for('home') }}">Pagina inicial</a>
+            <a class="nav-home" href="{{ url_for('perfil') }}">Meu perfil</a>
+            {% if session.get("papel") == "administrador" %}
+              <section class="nav-group">
+                <span class="nav-list-title">Administracao</span>
+                <ul>
+                  <li>
+                    <a href="{{ url_for('usuarios') }}">Usuarios</a>
+                  </li>
+                  <li>
+                    <a href="{{ url_for('auditoria') }}">Auditoria</a>
+                  </li>
+                </ul>
+              </section>
+            {% endif %}
             {% for exercise_list in exercise_lists %}
               <section class="nav-group">
                 <a

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% set title = "Cadastrar usuario - Portal de Exercicios" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/usuarios.css') }}">
+{% endblock %}
+
+{% block content %}
+  <section class="admin-page">
+    <header class="admin-header">
+      <div>
+        <p class="eyebrow">Administracao</p>
+        <h1>Cadastrar usuario</h1>
+      </div>
+      <a class="btn btn-secondary" href="{{ url_for('usuarios') }}">Voltar</a>
+    </header>
+
+    {% if erro %}
+      <p class="alert" role="alert">{{ erro }}</p>
+    {% endif %}
+
+    <form method="post" class="admin-form">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="text" required>
+
+      <label for="senha">Senha</label>
+      <input id="senha" name="senha" type="password" required>
+
+      <label for="data_nascimento">Data de nascimento</label>
+      <input id="data_nascimento" name="data_nascimento" type="date" required>
+
+      <label for="papel">Papel</label>
+      <select id="papel" name="papel">
+        <option value="usuario">usuario</option>
+        <option value="administrador">administrador</option>
+      </select>
+
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+  </section>
+{% endblock %}

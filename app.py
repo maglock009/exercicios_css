@@ -3,15 +3,20 @@ from pathlib import Path
 
 from flask import Flask, redirect, render_template, request, session, url_for
 
+from controllers.auditoria_controller import AuditoriaController
 from controllers.formularios_controller import FormulariosController
 from controllers.html_basico_controller import HTMLBasicoController
+from controllers.usuario_controller import UsuarioController
+from database.tables import inicializar_banco
+from services.usuario_service import UsuarioService
 
-DEFAULT_USER = "Miguel"
-DEFAULT_PASSWORD = "12345"
 BASE_DIR = Path(__file__).resolve().parent
 
 app = Flask(__name__)
 app.secret_key = "123456"
+
+inicializar_banco()
+usuario_service = UsuarioService()
 
 
 def login_required(view):
@@ -43,9 +48,12 @@ def login():
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
 
-        if username == DEFAULT_USER and password == DEFAULT_PASSWORD:
+        usuario = usuario_service.autenticar(username, password)
+        if usuario:
             session["is_authenticated"] = True
-            session["username"] = username
+            session["username"] = usuario["email"]
+            session["usuario_id"] = usuario["id"]
+            session["papel"] = usuario["papel"]
             return redirect(url_for("home"))
 
         error = "Usuario ou senha invalidos."
@@ -69,6 +77,9 @@ exercise_controllers = [
     FormulariosController(app, login_required),
     HTMLBasicoController(app, login_required),
 ]
+
+UsuarioController(app, login_required)
+AuditoriaController(app, login_required)
 
 
 if __name__ == "__main__":

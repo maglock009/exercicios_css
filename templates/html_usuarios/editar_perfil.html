@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% set title = "Meu perfil - Portal de Exercicios" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/usuarios.css') }}">
+{% endblock %}
+
+{% block content %}
+  <section class="admin-page">
+    <header class="admin-header">
+      <div>
+        <p class="eyebrow">Conta</p>
+        <h1>Meu perfil</h1>
+      </div>
+    </header>
+
+    {% if erro %}
+      <p class="alert" role="alert">{{ erro }}</p>
+    {% endif %}
+    {% if sucesso %}
+      <p class="alert success" role="status">{{ sucesso }}</p>
+    {% endif %}
+
+    <form method="post" class="admin-form">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="text" value="{{ usuario.email }}" required>
+
+      <label for="data_nascimento">Data de nascimento</label>
+      <input
+        id="data_nascimento"
+        name="data_nascimento"
+        type="date"
+        value="{{ usuario.data_nascimento }}"
+        required
+      >
+
+      <label for="senha">Nova senha (opcional)</label>
+      <input id="senha" name="senha" type="password" placeholder="Deixe em branco para manter">
+
+      <button type="submit" class="btn btn-primary">Salvar perfil</button>
+    </form>
+  </section>
+{% endblock %}

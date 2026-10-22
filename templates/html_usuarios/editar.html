@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% set title = "Editar usuario - Portal de Exercicios" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/usuarios.css') }}">
+{% endblock %}
+
+{% block content %}
+  <section class="admin-page">
+    <header class="admin-header">
+      <div>
+        <p class="eyebrow">Administracao</p>
+        <h1>Editar usuario</h1>
+      </div>
+      <a class="btn btn-secondary" href="{{ url_for('usuarios') }}">Voltar</a>
+    </header>
+
+    {% if erro %}
+      <p class="alert" role="alert">{{ erro }}</p>
+    {% endif %}
+
+    <form method="post" class="admin-form">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="text" value="{{ usuario.email }}" required>
+
+      <label for="data_nascimento">Data de nascimento</label>
+      <input
+        id="data_nascimento"
+        name="data_nascimento"
+        type="date"
+        value="{{ usuario.data_nascimento }}"
+        required
+      >
+
+      <label for="papel">Papel</label>
+      <select id="papel" name="papel">
+        <option value="usuario" {% if usuario.papel == 'usuario' %}selected{% endif %}>usuario</option>
+        <option value="administrador" {% if usuario.papel == 'administrador' %}selected{% endif %}>administrador</option>
+      </select>
+
+      <button type="submit" class="btn btn-primary">Salvar alteracoes</button>
+    </form>
+  </section>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% set title = "Auditoria - Portal de Exercicios" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='pages/auditoria.css') }}">
+{% endblock %}
+
+{% block content %}
+  <section class="admin-page">
+    <header class="admin-header">
+      <div>
+        <p class="eyebrow">Administracao</p>
+        <h1>Relatorio de auditoria</h1>
+        <p>Visualize os eventos registrados e exporte o arquivo Excel.</p>
+      </div>
+      <div class="admin-actions">
+        <a class="btn btn-primary" href="{{ url_for('relatorio_auditoria') }}">Exportar Excel</a>
+      </div>
+    </header>
+
+    <div class="table-panel">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>entidade_ID</th>
+            <th>Acao</th>
+            <th>Detalhes</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registro in registros %}
+            <tr>
+              <td>{{ registro.entidade_email }}</td>
+              <td>{{ registro.acao }}</td>
+              <td>{{ registro.detalhes or "-" }}</td>
+              <td>{{ formatar_data(registro.data_evento) }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="4">Nenhum registro de auditoria.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endblock %}
