@@ -20,7 +20,33 @@
       <p class="alert" role="alert">{{ erro }}</p>
     {% endif %}
 
-    <form method="post" class="admin-form">
+    <form method="post" class="admin-form" enctype="multipart/form-data">
+      <div class="profile-photo">
+        {% if imagem_url %}
+          <img src="{{ imagem_url }}" alt="Foto de perfil de {{ usuario.email }}">
+        {% else %}
+          <div class="profile-photo-placeholder" aria-hidden="true">
+            {{ usuario.email[:1]|upper }}
+          </div>
+        {% endif %}
+        <div class="profile-photo-fields">
+          <label for="imagem_perfil">Foto de perfil</label>
+          <input
+            id="imagem_perfil"
+            name="imagem_perfil"
+            type="file"
+            accept="image/jpeg,image/png,image/gif,image/webp"
+          >
+          <p class="field-hint">JPG, PNG, GIF ou WEBP até 2 MB.</p>
+          {% if imagem_url %}
+            <label class="checkbox-inline">
+              <input type="checkbox" name="remover_imagem" value="1">
+              Remover foto atual
+            </label>
+          {% endif %}
+        </div>
+      </div>
+
       <label for="email">E-mail</label>
       <input id="email" name="email" type="text" value="{{ usuario.email }}" required>
 
