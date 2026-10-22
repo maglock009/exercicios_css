@@ -86,7 +86,32 @@ class UsuarioService:
             )
         return usuario_id
 
-    def atualizar(self, usuario_id: int, email: str, data_nascimento: str, papel: str, autor_id: int | None = None):
+    def _atualizar_imagem_perfil(
+        self,
+        usuario_id: int,
+        imagem_anterior_id: int | None,
+        arquivo_imagem=None,
+        remover_imagem: bool = False,
+    ):
+        if arquivo_imagem is not None and getattr(arquivo_imagem, "filename", None):
+            nova_imagem_id = self.imagens.salvar_upload(arquivo_imagem)
+            self.usuarios.atualizar_imagem_perfil(usuario_id, nova_imagem_id)
+            if imagem_anterior_id and imagem_anterior_id != nova_imagem_id:
+                self.imagens.excluir(imagem_anterior_id)
+        elif remover_imagem and imagem_anterior_id:
+            self.usuarios.atualizar_imagem_perfil(usuario_id, None)
+            self.imagens.excluir(imagem_anterior_id)
+
+    def atualizar(
+        self,
+        usuario_id: int,
+        email: str,
+        data_nascimento: str,
+        papel: str,
+        autor_id: int | None = None,
+        arquivo_imagem=None,
+        remover_imagem: bool = False,
+    ):
         atual = self.usuarios.buscar_por_id(usuario_id)
         if not atual:
             raise ValueError("Usuário não encontrado.")
@@ -96,6 +121,12 @@ class UsuarioService:
             raise ValueError("Já existe um usuário com este e-mail.")
 
         self.usuarios.atualizar(usuario_id, email.strip(), data_nascimento, papel)
+        self._atualizar_imagem_perfil(
+            usuario_id=usuario_id,
+            imagem_anterior_id=atual.get("imagem_perfil_id"),
+            arquivo_imagem=arquivo_imagem,
+            remover_imagem=remover_imagem,
+        )
         if autor_id:
             self.auditoria.registrar(
                 autor_id,
@@ -125,15 +156,12 @@ class UsuarioService:
         if nova_senha:
             self.usuarios.atualizar_senha(usuario_id, self._hash_senha(nova_senha))
 
-        imagem_anterior_id = atual.get("imagem_perfil_id")
-        if arquivo_imagem is not None and getattr(arquivo_imagem, "filename", None):
-            nova_imagem_id = self.imagens.salvar_upload(arquivo_imagem)
-            self.usuarios.atualizar_imagem_perfil(usuario_id, nova_imagem_id)
-            if imagem_anterior_id and imagem_anterior_id != nova_imagem_id:
-                self.imagens.excluir(imagem_anterior_id)
-        elif remover_imagem and imagem_anterior_id:
-            self.usuarios.atualizar_imagem_perfil(usuario_id, None)
-            self.imagens.excluir(imagem_anterior_id)
+        self._atualizar_imagem_perfil(
+            usuario_id=usuario_id,
+            imagem_anterior_id=atual.get("imagem_perfil_id"),
+            arquivo_imagem=arquivo_imagem,
+            remover_imagem=remover_imagem,
+        )
 
         self.auditoria.registrar(
             usuario_id,

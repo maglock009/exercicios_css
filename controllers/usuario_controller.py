@@ -104,7 +104,16 @@ class UsuarioController(BaseController):
                     data_nascimento=request.form.get("data_nascimento", ""),
                     papel=request.form.get("papel", "usuario"),
                     autor_id=session.get("usuario_id"),
+                    arquivo_imagem=request.files.get("imagem_perfil"),
+                    remover_imagem=request.form.get("remover_imagem") == "1",
                 )
+                if session.get("usuario_id") == usuario_id:
+                    atualizado = self.usuario_service.buscar_por_id(usuario_id)
+                    session["username"] = atualizado["email"]
+                    session["papel"] = atualizado["papel"]
+                    session["imagem_perfil"] = ImagemService.url_publica(
+                        atualizado.get("imagem_caminho")
+                    )
                 return redirect(url_for("usuarios"))
             except ValueError as exc:
                 erro = str(exc)
@@ -113,6 +122,7 @@ class UsuarioController(BaseController):
         return render_template(
             "html_usuarios/editar.html",
             usuario=usuario,
+            imagem_url=ImagemService.url_publica(usuario.get("imagem_caminho")),
             erro=erro,
         )
 
