@@ -20,20 +20,37 @@
       <p class="alert" role="alert">{{ erro }}</p>
     {% endif %}
 
-    <form method="post" class="admin-form">
+    <form method="post" class="admin-form" novalidate>
       <label for="email">E-mail</label>
-      <input id="email" name="email" type="text" required>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        value="{{ form.email if form else '' }}"
+        placeholder="usuario@exemplo.com"
+        required
+      >
+      <p class="field-hint">Use um e-mail em formato válido.</p>
 
       <label for="senha">Senha</label>
       <input id="senha" name="senha" type="password" required>
+      <p class="field-hint">Mínimo: 1 letra maiúscula e 1 número.</p>
 
       <label for="data_nascimento">Data de nascimento</label>
-      <input id="data_nascimento" name="data_nascimento" type="date" required>
+      <input
+        id="data_nascimento"
+        name="data_nascimento"
+        type="date"
+        value="{{ form.data_nascimento if form else '' }}"
+        max="{{ data_maxima_nascimento }}"
+        required
+      >
+      <p class="field-hint">O usuário precisa ter 18 anos ou mais.</p>
 
       <label for="papel">Papel</label>
       <select id="papel" name="papel">
-        <option value="usuario">usuario</option>
-        <option value="administrador">administrador</option>
+        <option value="usuario" {% if not form or form.papel == 'usuario' %}selected{% endif %}>usuario</option>
+        <option value="administrador" {% if form and form.papel == 'administrador' %}selected{% endif %}>administrador</option>
       </select>
 
       <button type="submit" class="btn btn-primary">Salvar</button>
