@@ -8,18 +8,33 @@ class UsuarioRepository:
     def listar(self):
         return self.banco.buscar_todos(
             """
-            SELECT id, email, data_nascimento, papel
-            FROM usuarios
-            ORDER BY email
+            SELECT
+                u.id,
+                u.email,
+                u.data_nascimento,
+                u.papel,
+                u.imagem_perfil_id,
+                i.caminho AS imagem_caminho
+            FROM usuarios u
+            LEFT JOIN imagens i ON i.id = u.imagem_perfil_id
+            ORDER BY u.email
             """
         )
 
     def buscar_por_id(self, usuario_id: int):
         return self.banco.buscar_um(
             """
-            SELECT id, email, senha_hash, data_nascimento, papel
-            FROM usuarios
-            WHERE id = %s
+            SELECT
+                u.id,
+                u.email,
+                u.senha_hash,
+                u.data_nascimento,
+                u.papel,
+                u.imagem_perfil_id,
+                i.caminho AS imagem_caminho
+            FROM usuarios u
+            LEFT JOIN imagens i ON i.id = u.imagem_perfil_id
+            WHERE u.id = %s
             """,
             (usuario_id,),
         )
@@ -27,9 +42,17 @@ class UsuarioRepository:
     def buscar_por_email(self, email: str):
         return self.banco.buscar_um(
             """
-            SELECT id, email, senha_hash, data_nascimento, papel
-            FROM usuarios
-            WHERE email = %s
+            SELECT
+                u.id,
+                u.email,
+                u.senha_hash,
+                u.data_nascimento,
+                u.papel,
+                u.imagem_perfil_id,
+                i.caminho AS imagem_caminho
+            FROM usuarios u
+            LEFT JOIN imagens i ON i.id = u.imagem_perfil_id
+            WHERE u.email = %s
             """,
             (email,),
         )
@@ -72,6 +95,16 @@ class UsuarioRepository:
             WHERE id = %s
             """,
             (senha_hash, usuario_id),
+        )
+
+    def atualizar_imagem_perfil(self, usuario_id: int, imagem_perfil_id: int | None):
+        self.banco.executar(
+            """
+            UPDATE usuarios
+            SET imagem_perfil_id = %s
+            WHERE id = %s
+            """,
+            (imagem_perfil_id, usuario_id),
         )
 
     def excluir(self, usuario_id: int):

@@ -24,6 +24,7 @@
       <table class="data-table">
         <thead>
           <tr>
+            <th>Foto</th>
             <th>E-mail</th>
             <th>Data de nascimento</th>
             <th>Papel</th>
@@ -33,6 +34,19 @@
         <tbody>
           {% for usuario in usuarios %}
             <tr>
+              <td>
+                {% if usuario.imagem_caminho %}
+                  <img
+                    class="avatar-sm"
+                    src="{{ url_for('static', filename=usuario.imagem_caminho) }}"
+                    alt="Foto de {{ usuario.email }}"
+                  >
+                {% else %}
+                  <span class="avatar-sm avatar-fallback" aria-hidden="true">
+                    {{ usuario.email[:1]|upper }}
+                  </span>
+                {% endif %}
+              </td>
               <td>{{ usuario.email }}</td>
               <td>{{ formatar_data(usuario.data_nascimento) }}</td>
               <td>{{ usuario.papel }}</td>
@@ -43,7 +57,7 @@
             </tr>
           {% else %}
             <tr>
-              <td colspan="4">Nenhum usuario cadastrado.</td>
+              <td colspan="5">Nenhum usuario cadastrado.</td>
             </tr>
           {% endfor %}
         </tbody>

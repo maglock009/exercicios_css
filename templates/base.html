@@ -72,9 +72,22 @@
               >
                 <span class="sidebar-toggle-icon" aria-hidden="true"></span>
               </button>
-              <div>
-                <span class="eyebrow">Bem-vindo</span>
-                <strong>{{ session.get("username") }}</strong>
+              <div class="topbar-user">
+                {% if session.get("imagem_perfil") %}
+                  <img
+                    class="avatar-sm"
+                    src="{{ session.get('imagem_perfil') }}"
+                    alt="Foto de perfil"
+                  >
+                {% else %}
+                  <span class="avatar-sm avatar-fallback" aria-hidden="true">
+                    {{ (session.get("username") or "?")[:1]|upper }}
+                  </span>
+                {% endif %}
+                <div>
+                  <span class="eyebrow">Bem-vindo</span>
+                  <strong>{{ session.get("username") }}</strong>
+                </div>
               </div>
             </div>
             <a class="logout-link" href="{{ url_for('logout') }}">Sair</a>

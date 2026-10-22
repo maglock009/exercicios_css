@@ -6,6 +6,7 @@ from openpyxl import Workbook
 
 from repositories.auditoria_repository import AuditoriaRepository
 from repositories.usuario_repository import UsuarioRepository
+from services.imagem_service import ImagemService
 
 
 class UsuarioService:
@@ -13,9 +14,11 @@ class UsuarioService:
         self,
         usuario_repository: UsuarioRepository | None = None,
         auditoria_repository: AuditoriaRepository | None = None,
+        imagem_service: ImagemService | None = None,
     ):
         self.usuarios = usuario_repository or UsuarioRepository()
         self.auditoria = auditoria_repository or AuditoriaRepository()
+        self.imagens = imagem_service or ImagemService()
 
     @staticmethod
     def _hash_senha(senha: str) -> str:
@@ -101,7 +104,15 @@ class UsuarioService:
                 datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             )
 
-    def atualizar_perfil(self, usuario_id: int, email: str, data_nascimento: str, nova_senha: str | None = None):
+    def atualizar_perfil(
+        self,
+        usuario_id: int,
+        email: str,
+        data_nascimento: str,
+        nova_senha: str | None = None,
+        arquivo_imagem=None,
+        remover_imagem: bool = False,
+    ):
         atual = self.usuarios.buscar_por_id(usuario_id)
         if not atual:
             raise ValueError("Usuário não encontrado.")
@@ -113,6 +124,16 @@ class UsuarioService:
         self.usuarios.atualizar_perfil(usuario_id, email.strip(), data_nascimento)
         if nova_senha:
             self.usuarios.atualizar_senha(usuario_id, self._hash_senha(nova_senha))
+
+        imagem_anterior_id = atual.get("imagem_perfil_id")
+        if arquivo_imagem is not None and getattr(arquivo_imagem, "filename", None):
+            nova_imagem_id = self.imagens.salvar_upload(arquivo_imagem)
+            self.usuarios.atualizar_imagem_perfil(usuario_id, nova_imagem_id)
+            if imagem_anterior_id and imagem_anterior_id != nova_imagem_id:
+                self.imagens.excluir(imagem_anterior_id)
+        elif remover_imagem and imagem_anterior_id:
+            self.usuarios.atualizar_imagem_perfil(usuario_id, None)
+            self.imagens.excluir(imagem_anterior_id)
 
         self.auditoria.registrar(
             usuario_id,
@@ -129,7 +150,11 @@ class UsuarioService:
             raise ValueError("Não é possível excluir o próprio usuário.")
 
         email = atual["email"]
+        imagem_perfil_id = atual.get("imagem_perfil_id")
+        self.usuarios.atualizar_imagem_perfil(usuario_id, None)
         self.usuarios.excluir(usuario_id)
+        if imagem_perfil_id:
+            self.imagens.excluir(imagem_perfil_id)
         if autor_id:
             self.auditoria.registrar(
                 autor_id,
